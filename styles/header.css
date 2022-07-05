@@ -1,5 +1,6 @@
 .header {
     padding: 0px 15px;
+    height: fit-content;
 }
 
 .header .nav-item {
@@ -8,7 +9,7 @@
 
 .header .navbar {
     padding: 10px 0px;
-    line-height: 50px;
+    line-height: 16px;
 }
 
 .header.sticky {
