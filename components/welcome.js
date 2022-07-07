@@ -1,4 +1,5 @@
 import React from "react";
+import Image from 'next/image'
 import { Container, Row, Col } from "reactstrap";
 
 const Welcome = () => {
