@@ -18,7 +18,7 @@ const Welcome = () => {
 
                     <Col lg={6}>
                         <div className="mt-5 mt-lg-0">
-                            <img src="/images/welcome_page.jpg" alt="" className="img-fluid mx-auto d-block"></img>
+                            <Image src="/images/welcome_page.jpg" alt="" className="img-fluid mx-auto d-block" />
                         </div>
                     </Col>
                 </Row>

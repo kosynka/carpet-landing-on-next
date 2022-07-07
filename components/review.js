@@ -3,12 +3,12 @@ import { Container, Row, Col } from "reactstrap";
 
 const Review = () => {
     const reviewes = [
-        { title: "Мадина", description: "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s" },
-        { title: "Аскар", description: "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s" },
-        { title: "Айнур", description: "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s" },
-        { title: "Жазира", description: "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s" },
-        { title: "Кайрат", description: "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s" },
-        { title: "Влада", description: "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s" },
+        { title: "Мадина", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus pellentesque in mauris sit amet sollicitudin." },
+        { title: "Аскар", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus pellentesque in mauris sit amet sollicitudin." },
+        { title: "Айнур", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus pellentesque in mauris sit amet sollicitudin." },
+        { title: "Жазира", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus pellentesque in mauris sit amet sollicitudin." },
+        { title: "Кайрат", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus pellentesque in mauris sit amet sollicitudin." },
+        { title: "Влада", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus pellentesque in mauris sit amet sollicitudin." },
     ];
 
     return (
@@ -20,7 +20,7 @@ const Review = () => {
                             <h3 className="font-weight-normal text-dark">
                                 <span className="text-warning">Отзывы наших клиентов</span>
                             </h3>
-                            <p className="text-muted">Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book</p>
+                            <p className="text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus pellentesque in mauris sit amet sollicitudin.</p>
                         </div>
                     </Col>
                 </Row>
