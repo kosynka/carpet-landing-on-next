@@ -1,11 +1,12 @@
 import Layout from '../components/layout';
 import Header from '../components/header';
 import Welcome from '../components/welcome';
-import Service from '../components/service';
-// import Example from '../components/example';
-// import Price from '../components/price';
+import Problem from '../components/problem';
+import CleaningProcess from '../components/cleaning_process';
+import Example from '../components/example';
+import Price from '../components/price';
 import Review from '../components/review';
-// import Order from '../components/order';
+import Order from '../components/order';
 import About from '../components/about';
 import Footer from '../components/footer';
 
@@ -14,11 +15,12 @@ const Index = () => {
     <Layout pageTitle="Чистка ковров | kilem juu">
       <Header />
       <Welcome />
-      <Service />
-      {/* <Example />
-      <Price /> */}
+      <Problem />
+      <CleaningProcess />
+      <Example />
+      <Price />
       <Review />
-      {/* <Order /> */}
+      <Order />
       <About />
       <Footer />
     </Layout>

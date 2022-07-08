@@ -56,7 +56,7 @@ const Header = () => {
                         </NavItem>
 
                         <NavItem className="px-3">
-                            <NavLink href="#about" onClick={toggle}>Оставить отзыв</NavLink>
+                            <NavLink href="#about" onClick={toggle}>Контакты</NavLink>
                         </NavItem>
                     </Nav>
                 </Collapse>
