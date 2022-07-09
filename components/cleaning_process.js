@@ -26,7 +26,7 @@ const CleaningProcess = () => {
                                         <div key={card.id}>
                                             <div className="card mt-5">
                                                 <img className="card-img-top" layout="fill" alt="" src={card.img}/>
-                                                <div className="circle"><span>{card.id}</span></div>
+                                                <div className="span-text"><span>{card.id}</span></div>
                                                 <div className="card-body">
                                                     <h4 className="card-title">{card.title}</h4>
                                                     <p className="card-text text-left">{card.description}</p>

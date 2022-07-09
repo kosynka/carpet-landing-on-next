@@ -1,48 +1,86 @@
 import React, { useState } from "react";
+import ReactDOM from 'react-dom'
 import { Row, Col } from "reactstrap";
 import { Modal, Button } from 'react-bootstrap';
+import next from "next";
 
 const Example = () => {
     const [show, setIsShow] = useState(false);
     const [fullscreen, setFullscreen] = useState(true);
     const handleClose = () => setIsShow(false);
-    const handleShow = () => setIsShow(true);
+
+    var ids = [2, 2];
+
+    function handleShow(id, nextId) {
+        setIsShow(true);
+        ids[0] = id;
+        ids[1] = nextId;
+        console.log(ids);
+    }
+
+    const examples = [
+        {id: 1, imgPre: "/images/example1pre.jpg", imgAfter: "/images/example1after.jpg"},
+        {id: 2, imgPre: "/images/example2pre.jpg", imgAfter: "/images/example2after.jpg"},
+        {id: 3, imgPre: "/images/example3pre.jpg", imgAfter: "/images/example3after.jpg"},
+    ];
 
     return (
         <section className="section" id="example">
-            <Row className="justify-content-center">
+            <Row>
                 <Col lg={12} md={8}>
-                    <div className="title text-center mb-5">
+                    <div className="title mb-5 text-center">
                         <h3 className="font-weight-normal text-dark">
                             <span className="text-warning">Пример работ</span>
-                            <p className="text-muted">до и после</p>
+                            <p className="text-muted mb-4">до и после</p>
                         </h3>
 
-                        <div className="row">
-                            <div className="mb-4">
-                                <Button onClick={handleShow}>
-                                    Launch demo modal
-                                </Button>
+                        {examples.map(example => (
+                        <Row key={example.id} className="mb-4">
+                            <Col md={6} className="mb-4">
+                                <div className="row">
+                                    <div className="mt-4">
+                                        <img
+                                            width="85%"
+                                            src={example.imgPre}
+                                            alt=""
+                                            className="modal-img rounded"
+                                            onClick={() => handleShow(example.id, 1)}
+                                            data-bs-toggle="modal"
+                                        />
+                                    </div>
+                                </div>
+                            </Col>
 
-                                <Modal size="lg" fullscreen={fullscreen} show={show} onHide={handleClose} aria-labelledby="contained-modal-title-vcenter" centered>
-                                    <Modal.Header closeButton>
-                                        <Modal.Title>Modal</Modal.Title>
-                                    </Modal.Header>
-                                    <Modal.Body>
-                                        <Col xs={12} md={12}>
-                                            <img
-                                                width={1024}
-                                                src="../images/problem4.jpg"
-                                                data-mdb-img="../images/problem4.jpg"
-                                                alt=""
-                                                className="modal-img shadow-1-strong rounded"
-                                            />
-                                        </Col>
-                                    </Modal.Body>
-                                </Modal>
-                            </div>
+                            <Col md={6} className="mb-4">
+                                <div className="row">
+                                    <div className="mt-4">
+                                        <img
+                                            width="85%"
+                                            src={example.imgAfter}
+                                            alt=""
+                                            className="modal-img rounded"
+                                            onClick={() => handleShow(example.id, 2)}
+                                        />
+                                    </div>
+                                </div>
+                            </Col>
+                        </Row>
+                        ))}
 
-                        </div>
+                        <Modal size="xl" show={show} onHide={handleClose} aria-labelledby="contained-modal-title-vcenter" centered>
+                            <Modal.Body>
+                                <Col xs={12} md={12}>
+                                    <img
+                                        width="100%"
+                                        height="100%"
+                                        src={ids[1] < 1 ? examples[ids[0]]["imgPre"] : examples[ids[0]]["imgAfter"]}
+                                        alt=""
+                                        className="modal-img rounded"
+                                    />
+                                    {ids[0]} {ids[1]}
+                                </Col>
+                            </Modal.Body>
+                        </Modal>
                     </div>
                 </Col>
             </Row>

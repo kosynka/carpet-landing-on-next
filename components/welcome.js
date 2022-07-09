@@ -19,7 +19,7 @@ const Welcome = () => {
 
                     <Col lg={6}>
                         <div className="mt-5 mt-lg-0">
-                            <Image objectFit="contain" height={574} width={612} src="/images/welcome_page.jpg" alt="" className="img-fluid mx-auto d-block" />
+                            <Image priority={true} objectFit="contain" height={574} width={612} src="/images/welcome_page.jpg" alt="" className="img-fluid mx-auto d-block" />
                         </div>
                     </Col>
                 </Row>
