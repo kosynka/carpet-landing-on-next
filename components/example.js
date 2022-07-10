@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import ReactDOM from 'react-dom'
 import { Row, Col } from "reactstrap";
 import { Modal, Button } from 'react-bootstrap';
@@ -6,16 +6,16 @@ import next from "next";
 
 const Example = () => {
     const [show, setIsShow] = useState(false);
-    const [fullscreen, setFullscreen] = useState(true);
     const handleClose = () => setIsShow(false);
+    const [imgSrc, setImgSrc] = useState('');
 
-    var ids = [2, 2];
+    var ids = [0, 0];
 
     function handleShow(id, nextId) {
         setIsShow(true);
-        ids[0] = id;
+        ids[0] = id-1;
         ids[1] = nextId;
-        console.log(ids);
+        setImgSrc(ids[1] == 1 ? examples[ids[0]]["imgPre"] : examples[ids[0]]["imgAfter"]);
     }
 
     const examples = [
@@ -67,17 +67,11 @@ const Example = () => {
                         </Row>
                         ))}
 
+                        {/* Modal pop-up */}
                         <Modal size="xl" show={show} onHide={handleClose} aria-labelledby="contained-modal-title-vcenter" centered>
                             <Modal.Body>
                                 <Col xs={12} md={12}>
-                                    <img
-                                        width="100%"
-                                        height="100%"
-                                        src={ids[1] < 1 ? examples[ids[0]]["imgPre"] : examples[ids[0]]["imgAfter"]}
-                                        alt=""
-                                        className="modal-img rounded"
-                                    />
-                                    {ids[0]} {ids[1]}
+                                    <img width="100%" height="100%" src={imgSrc} alt="" className="modal-img rounded"/>
                                 </Col>
                             </Modal.Body>
                         </Modal>
