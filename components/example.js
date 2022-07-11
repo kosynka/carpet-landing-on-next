@@ -2,7 +2,6 @@ import React, { useState, useRef } from "react";
 import ReactDOM from 'react-dom'
 import { Row, Col } from "reactstrap";
 import { Modal, Button } from 'react-bootstrap';
-import next from "next";
 
 const Example = () => {
     const [show, setIsShow] = useState(false);
