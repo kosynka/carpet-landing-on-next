@@ -36,7 +36,7 @@ const Header = () => {
                 <Collapse className="col-9" id="navbarShow" isOpen={isOpen} navbar>
                     <Nav navbar>
                         <NavItem className="px-3" onClick={toggle}>
-                            <NavLink href="#service">Виды услуг</NavLink>
+                            <NavLink href="#problem">Виды услуг</NavLink>
                         </NavItem>
 
                         <NavItem className="px-3" onClick={toggle}>

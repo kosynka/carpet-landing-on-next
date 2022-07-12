@@ -1,84 +1,130 @@
 import React, { useState, useRef } from "react";
-import { Container, Row, Col, Form, FormGroup, Label, Input, FormText, Button } from "reactstrap";
-import ReactDOM from "react-dom";
+import { Container, Row, Col, Form, FormGroup, Label, Input, Button } from "reactstrap";
+
+var iterator = 2;
+var new_data = {
+    carpetname: [],
+    height: [],
+    width: []
+}
 
 const Order = () => {
     const [inputList, setInputList] = useState([]);
     const [summ, setSum] = useState();
-    const [state, setState] = useState({
-        username: "",
-        data: ""
-    })
-
-    
-    const handleSubmit = (event) => {
-        event.preventDefault()
-        
-        var target = event.target;
-        
-        const data = {
-            username: target.username.value,
-            carpetname: target.select.value,
-            height: target.height.value,
-            width: target.width.value,
-            text: target.text.value,
-        }
-        
-        console.log(data);
-    }
-    
-    function handleChange(event) {
-        const value = event.target.value;
-        setState({
-            ...state,
-            [event.target.name]: value
-        });
-    }
+    const [success, setSuccess] = useState('');
 
     const carpetRef = useRef();
     const heightRef = useRef();
     const widthRef = useRef();
 
-    const testcarpetRef = React.createRef();
-    const testheightRef = React.createRef();
-    const testwidthRef = React.createRef();
-    const i = 0;
-    
-    const addOrderBox = () => {
-        setInputList(inputList.concat(<OrderBox key={inputList.length} props={[testcarpetRef, testheightRef, testwidthRef, i++]} />));
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        var target = event.target;
+
+        let send_carpets = [carpetRef.current.value];
+        let send_heights = [heightRef.current.value];
+        let send_widths = [widthRef.current.value];
+        let send_areas = [heightRef.current.value*widthRef.current.value];
+
+        let stop = iterator - 2;
+
+        for(let i = 0; i < stop; i++) {
+            let carpet = document.getElementById(new_data.carpetname[i]).value;
+            let height = document.getElementById(new_data.height[i]).value;
+            let width = document.getElementById(new_data.width[i]).value;
+            let area = height * width;
+            
+            send_carpets.push(carpet);
+            send_heights.push(height);
+            send_widths.push(width);
+            send_areas.push(area);
+        }
+
+        const data = {
+            username: target.username.value,
+            phone: target.phone.value,
+            carpetnames: send_carpets,
+            heights: send_heights,
+            widths: send_widths,
+            areas: send_areas,
+            sum: calculateSum(),
+            text: target.text.value,
+        }
+
+        const res = await fetch("/api/sendgrid", {
+            body: JSON.stringify({
+                subject: data,
+            }),
+            headers: {
+                "Content-Type": "application/json",
+            },
+            method: "POST",
+        });
     }
     
+    function createIDs(num) {
+        let select = 'select' + num;
+        let height = 'height' + num;
+        let width = 'width' + num;
+        return [select, height, width];
+    }
+    
+    const addOrderBox = () => {
+        setInputList(inputList.concat(<OrderBox key={inputList.length} id={createIDs(iterator)} />));
+
+        let select = 'select' + iterator;
+        let height = 'height' + iterator;
+        let width = 'width' + iterator;
+
+        console.log('added ' + select, height, width);
+
+        new_data.carpetname.push(select);
+        new_data.height.push(height);
+        new_data.width.push(width);
+
+        iterator = iterator + 1;
+    }
+
     const calculateSum = (event) => {
+        var output_sum = 0;
+        var carpets = [];
+        var areas = [];
+
+        let stop = iterator - 2;
+        for(let i = 0; i < stop; i++) {
+            let carpet = document.getElementById(new_data.carpetname[i]).value;
+            let area = document.getElementById(new_data.height[i]).value * document.getElementById(new_data.width[i]).value;
+            
+            carpets.push(carpet);
+            areas.push(area);
+        }
 
         const data = {
             carpetname: carpetRef.current.value,
             height: heightRef.current.value,
             width: widthRef.current.value,
         }
-        console.log(data);
 
-        const test = {
-            carpetname: testcarpetRef.current,
-            height: testheightRef.current,
-            width: testwidthRef.current,
+        carpets.push(data.carpetname);
+        areas.push(data.height * data.width);
+
+        let fin_stop = iterator - 1;
+        for(let i = 0; i < fin_stop; i++) {
+            if(carpets[i] == 'wool') {
+                output_sum = output_sum + (areas[i] * 500);
+            } else if(carpets[i] == 'synthetic') {
+                output_sum = output_sum + (areas[i] * 600);
+            } else if(carpets[i] == 'heavy') {
+                output_sum = output_sum + (areas[i] * 700);
+            } else if(carpets[i] == 'silk') {
+                output_sum = output_sum + (areas[i] * 800);
+            } else if(carpets[i] == 'shaggy') {
+                output_sum = output_sum + (areas[i] * 900);
+            }
         }
+        setSum(output_sum);
 
-        console.log(test);
-
-        var carpet = data.carpetname;
-        var area = data.height * data.width;
-
-        if(carpet == 'wool') {
-            setSum(area * 500);
-        } else if(carpet == 'synthetic') {
-            setSum(area * 600);
-        } else if(carpet == 'heavy') {
-            setSum(area * 700);
-        } else if(carpet == 'silk') {
-            setSum(area * 800);
-        } else if(carpet == 'shaggy') {
-            setSum(area * 900);
-        }
+        return output_sum;
     }
 
     return (
@@ -94,13 +140,21 @@ const Order = () => {
 
                             <Form onSubmit={handleSubmit}>
                                 <FormGroup>
-                                    <Input
+                                    <Input required
                                     id="username"
                                     name="username"
                                     placeholder="Ваше имя"
                                     type="text"
-                                    value={state.username}
-                                    onChange={handleChange}
+                                    />
+                                </FormGroup>
+
+                                <FormGroup>
+                                    <Input required
+                                    id="phone"
+                                    name="phone"
+                                    placeholder="Номер телефона: 87001002030"
+                                    pattern="^\d{11}$"
+                                    type="tel"
                                     />
                                 </FormGroup>
 
@@ -109,7 +163,7 @@ const Order = () => {
                                         <FormGroup>
                                             <select
                                             className="form-select"
-                                            id="exampleSelect"
+                                            id="select1"
                                             name="select"
                                             ref={carpetRef}
                                             >
@@ -126,9 +180,9 @@ const Order = () => {
                                         <FormGroup>
                                             <input
                                             className="form-control"
-                                            id="height"
+                                            id="height1"
                                             name="height"
-                                            placeholder="длина"
+                                            placeholder="длина, м"
                                             type="number"
                                             ref={heightRef}
                                             />
@@ -139,9 +193,9 @@ const Order = () => {
                                         <FormGroup>
                                             <input
                                             className="form-control"
-                                            id="width"
+                                            id="width1"
                                             name="width"
-                                            placeholder="ширина"
+                                            placeholder="ширина, м"
                                             type="number"
                                             ref={widthRef}
                                             />
@@ -179,6 +233,10 @@ const Order = () => {
                                 <Button color="success" type="submit">
                                     Сделать заказ
                                 </Button>
+
+                                <Label for="success">
+                                    {success}
+                                </Label>
                             </Form>
                         </div>
                     </Col>
@@ -191,14 +249,13 @@ const Order = () => {
 const OrderBox = (props) => {
     return (
         <>
-        <Row key={props[3]}>
+        <Row>
             <Col md={6}>
                 <FormGroup>
                     <select
                     className="form-select"
-                    id="exampleSelect"
+                    id={props.id[0]}
                     name="select"
-                    ref={props[0]}
                     >
                         <option value="wool">Шерстяной ковер</option>
                         <option value="synthetic">Синтетический ковер</option>
@@ -213,11 +270,10 @@ const OrderBox = (props) => {
                 <FormGroup>
                     <input
                     className="form-control"
-                    id="height"
+                    id={props.id[1]}
                     name="height"
-                    placeholder="длина"
+                    placeholder="длина, м"
                     type="number"
-                    ref={props[1]}
                     />
                 </FormGroup>
             </Col>
@@ -226,11 +282,10 @@ const OrderBox = (props) => {
                 <FormGroup>
                     <input
                     className="form-control"
-                    id="width"
+                    id={props.id[2]}
                     name="width"
-                    placeholder="ширина"
+                    placeholder="ширина, м"
                     type="number"
-                    ref={props[2]}
                     />
                 </FormGroup>
             </Col>
