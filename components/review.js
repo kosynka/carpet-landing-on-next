@@ -3,12 +3,12 @@ import { Container, Row, Col } from "reactstrap";
 
 const Review = () => {
     const reviewes = [
-        { title: "Мадина", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus pellentesque in mauris sit amet sollicitudin." },
-        { title: "Аскар", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus pellentesque in mauris sit amet sollicitudin." },
-        { title: "Айнур", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus pellentesque in mauris sit amet sollicitudin." },
-        { title: "Жазира", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus pellentesque in mauris sit amet sollicitudin." },
-        { title: "Кайрат", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus pellentesque in mauris sit amet sollicitudin." },
-        { title: "Влада", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus pellentesque in mauris sit amet sollicitudin." },
+        { title: "Мадина", description: "Удобно, качественно, быстро и недорого! Прекрасно очистили дорогой шелковый ковёр, боялась отдавать на чистку. Но, к счастью все было сделано на высшем уровне. дополнительных наценок за прочие услуги не делали, всё по договору. Приехали, забрали ковёр, привезли через 4 дня. Как новенький!)" },
+        { title: "Динара", description: "Очень довольна. Уже 4 года сдаю им свои ковры с Айнабулака. Всегда чистые и в белых пакетах привозят. Администртору отдельное спасибо!!!" },
+        { title: "Федор", description: "Вчера заказали чистку ковров, всё сделали отлично. Рекомендую! За два дня как договаривались всё сделали." },
+        { title: "Жазира", description: "Уже не первый год стираю ковры у вас...мне очень нравится...чисто...качественно" },
+        { title: "Карлыгаш", description: "Просто замечательная мойка ковров очень довольна 800 тенге квадратный метр 20 кв ковер мне вышел всего в 16 000 тенге ковер как новый!" },
+        { title: "Влада", description: "Как-то раз сдавала им ковры на стирку. Осталась довольна качеством постиранных ковров (и люди попались приятные, простые)." },
     ];
 
     return (
@@ -16,11 +16,11 @@ const Review = () => {
             <Container>
                 <Row className="justify-content-center">
                     <Col lg={6} md={8}>
-                        <div className="title text-center md-5">
+                        <div className="title text-center md-5 mb-5">
                             <h3 className="font-weight-normal text-dark">
                                 <span className="text-warning">Отзывы наших клиентов</span>
                             </h3>
-                            <p className="text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus pellentesque in mauris sit amet sollicitudin.</p>
+                            <p className="text-muted">Ваши отзывы делают нашу работу лучше и качественнее.</p>
                         </div>
                     </Col>
                 </Row>
@@ -31,7 +31,12 @@ const Review = () => {
                                 <div className="md-5">
                                     <i className={review.icon}></i>
                                 </div>
-                                <h5 className="text-dark font-weight-normal pt-1 mb-4">{review.title}</h5>
+                                <h5 className="text-dark font-weight-normal pt-1">{review.title}</h5>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="yellow" className="bi bi-star-fill me-1" viewBox="0 0 16 16"> <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/> </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="yellow" className="bi bi-star-fill me-1" viewBox="0 0 16 16"> <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/> </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="yellow" className="bi bi-star-fill me-1" viewBox="0 0 16 16"> <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/> </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="yellow" className="bi bi-star-fill me-1" viewBox="0 0 16 16"> <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/> </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="yellow" className="bi bi-star-fill me-1" viewBox="0 0 16 16"> <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/> </svg>
                                 <p className="text-muted mb-4">{review.description}</p>
                             </Col>
                         )

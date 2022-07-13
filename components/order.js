@@ -50,16 +50,29 @@ const Order = () => {
             sum: calculateSum(),
             text: target.text.value,
         }
+        var text_for_url = '';
+        for (let i = 0; i < data.carpetnames.length; i++) {
+            text_for_url = text_for_url + data.carpetnames[i] + '%20' + data.heights[i] + '%20х%20' + data.widths[i] + '%20=%20' + data.areas[i] + 'кв.м%0a';
+        }
+        alert(text_for_url);
 
-        const res = await fetch("/api/sendgrid", {
-            body: JSON.stringify({
-                subject: data,
-            }),
-            headers: {
-                "Content-Type": "application/json",
-            },
-            method: "POST",
-        });
+        var extra_text = data.text.replace(' ', "%20");
+        text_for_url = text_for_url + 'На%20общую%20сумму:%20' + data.sum + '%0a' + 'Дополнительные%20пожелания:%0a' + extra_text;
+
+        var url = 'https://wa.me/77022363206?text=Добрый%20день%20меня%20зовут%20' + data.username + '%0a'
+        + 'Хочу%20заказать%20у%20Вас%20чистку%20на%20эти%20ковры:%0a' + text_for_url;
+
+        window.open(url, '_blank').focus();
+
+        // const res = await fetch("/api/sendgrid", {
+        //     body: JSON.stringify({
+        //         subject: data,
+        //     }),
+        //     headers: {
+        //         "Content-Type": "application/json",
+        //     },
+        //     method: "POST",
+        // });
     }
     
     function createIDs(num) {
@@ -110,15 +123,15 @@ const Order = () => {
 
         let fin_stop = iterator - 1;
         for(let i = 0; i < fin_stop; i++) {
-            if(carpets[i] == 'wool') {
+            if(carpets[i] == 'Шерстяной') {
                 output_sum = output_sum + (areas[i] * 500);
-            } else if(carpets[i] == 'synthetic') {
+            } else if(carpets[i] == 'Синтетический') {
                 output_sum = output_sum + (areas[i] * 600);
-            } else if(carpets[i] == 'heavy') {
+            } else if(carpets[i] == 'Тяжелый') {
                 output_sum = output_sum + (areas[i] * 700);
-            } else if(carpets[i] == 'silk') {
+            } else if(carpets[i] == 'Шелковый') {
                 output_sum = output_sum + (areas[i] * 800);
-            } else if(carpets[i] == 'shaggy') {
+            } else if(carpets[i] == 'Шегги') {
                 output_sum = output_sum + (areas[i] * 900);
             }
         }
@@ -167,11 +180,11 @@ const Order = () => {
                                             name="select"
                                             ref={carpetRef}
                                             >
-                                                <option value="wool">Шерстяной ковер</option>
-                                                <option value="synthetic">Синтетический ковер</option>
-                                                <option value="heavy">Тяжелый ковер 4х4, 5х4</option>
-                                                <option value="silk">Шелковый ковер</option>
-                                                <option value="shaggy">Шегги ковер</option>
+                                                <option value="Шерстяной">Шерстяной ковер</option>
+                                                <option value="Синтетический">Синтетический ковер</option>
+                                                <option value="Тяжелый">Тяжелый ковер 4х4, 5х4</option>
+                                                <option value="Шелковый">Шелковый ковер</option>
+                                                <option value="Шегги">Шегги ковер</option>
                                             </select>
                                         </FormGroup>
                                     </Col>
@@ -257,11 +270,11 @@ const OrderBox = (props) => {
                     id={props.id[0]}
                     name="select"
                     >
-                        <option value="wool">Шерстяной ковер</option>
-                        <option value="synthetic">Синтетический ковер</option>
-                        <option value="heavy">Тяжелый ковер 4х4, 5х4</option>
-                        <option value="silk">Шелковый ковер</option>
-                        <option value="shaggy">Шегги ковер</option>
+                        <option value="Шерстяной">Шерстяной ковер</option>
+                        <option value="Синтетический">Синтетический ковер</option>
+                        <option value="Тяжелый">Тяжелый ковер 4х4, 5х4</option>
+                        <option value="Шелковый">Шелковый ковер</option>
+                        <option value="Шегги">Шегги ковер</option>
                     </select>
                 </FormGroup>
             </Col>
